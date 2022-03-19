@@ -2,3 +2,6 @@
 apps/*/build
 packages/*/build
 node_modules
+package-lock.json
+apps/*/package.json
+packages/*/package.json
