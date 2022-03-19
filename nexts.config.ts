@@ -43,14 +43,16 @@ export default defineConfig({
 			},
 			rootElementID: 'app',
 			icons: {
-				titleBarDark: '#',
-				titleBarLight: '#',
-				mac: '#',
-				windowsLinux: '#',
+				titleBarDark: './resources/icons/TitleBarDark-540x540.svg',
+				titleBarLight: './resources/icons/TitleBarLight-540x540.svg',
+				mac: '#', // TODO: Implement ICNS
+				windowsLinux: './resources/icons/WindowsLinux-512x512.png',
 			},
 			dependencies: {
 				'@nexts-stack/desktop-uix': pkg.devDependencies['@nexts-stack/cli-service'],
 				'@nexts-stack/desktop': pkg.devDependencies['@nexts-stack/cli-service'],
+				"@nexts-stack/desktop": "^1.0.0-dev.11",
+				"@nexts-stack/desktop-uix": "^1.0.0-dev.11",
 			}
 		}
 	]

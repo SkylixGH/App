@@ -11,10 +11,8 @@
     "compile": "nexts compile",
     "postinstall": "nexts compile"
   },
-  "dependencies": {
-    "typescript": "^4.6.2"
-  },
   "devDependencies": {
+    "typescript": "^4.6.2",
     "@nexts-stack/cli-service": "^1.0.0-dev.11"
   }
 }
