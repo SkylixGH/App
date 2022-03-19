@@ -1,0 +1,4 @@
+.nexts
+apps/*/build
+packages/*/build
+node_modules

@@ -1,0 +1,20 @@
+{
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:desktop": "nexts dev --name desktop",
+    "dev:mobile": "nexts dev --name mobile",
+    "dev:web": "nexts dev --name web",
+    "dev:server": "nexts dev --name server",
+    "compile": "nexts compile",
+    "postinstall": "nexts compile"
+  },
+  "dependencies": {
+    "typescript": "^4.6.2"
+  },
+  "devDependencies": {
+    "@nexts-stack/cli-service": "^1.0.0-dev.11"
+  }
+}
