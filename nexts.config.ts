@@ -29,6 +29,29 @@ export default defineConfig({
 			dependencies: {
 				'@nexts-stack/logger': pkg.devDependencies['@nexts-stack/cli-service'],
 			}
+		},
+		{
+			type: 'desktop',
+			name: 'desktop',
+			id: 'net.skylix.app.desktop',
+			displayName: 'Skylix Desktop App',
+			description: 'The Skylix desktop app',
+			path: './apps/desktop',
+			main: {
+				backend: './src/main/main.ts',
+				frontend: './src/front/front.tsx',
+			},
+			rootElementID: 'app',
+			icons: {
+				titleBarDark: '#',
+				titleBarLight: '#',
+				mac: '#',
+				windowsLinux: '#',
+			},
+			dependencies: {
+				'@nexts-stack/desktop-uix': pkg.devDependencies['@nexts-stack/cli-service'],
+				'@nexts-stack/desktop': pkg.devDependencies['@nexts-stack/cli-service'],
+			}
 		}
 	]
 })
