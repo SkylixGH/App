@@ -1,8 +1,8 @@
 import React from 'react';
 import TitleBarLightIcon from "../../../resources/icons/TitleBarLight-540x540.svg";
 import TitleBarDarkIcon from "../../../resources/icons/TitleBarDark-540x540.svg";
-import {useThemeType} from "@nexts-stack/desktop-uix";
-
+import {Button, useThemeType} from "@nexts-stack/desktop-uix";
+import global from "../global";
 /**
  * The app home page.
  * @returns The react home component.
@@ -27,6 +27,8 @@ export default function Home() {
 				width: '100%',
 				textAlign: 'center',
 			}}>Skylix (Under Construction)</h1>
+
+			<Button onClick={() => global.router?.navigate('/login')}>Login</Button>
 		</>
 	)
 }

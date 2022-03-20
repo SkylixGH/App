@@ -1,6 +1,4 @@
-import TitleBarLightIcon from '../../resources/icons/TitleBarLight-540x540.svg';
-import TitleBarDarkIcon from '../../resources/icons/TitleBarDark-540x540.svg';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
 	NavigationView,
 	RouterView,
@@ -8,10 +6,13 @@ import {
 	useChannel,
 	App,
 	useRouter,
-	useThemeType, useAppWindow
+	useThemeType,
+	useAppWindow
 } from "@nexts-stack/desktop-uix";
 import Home from "./pages/Home";
 import AppInfo from "./pages/AppInfo";
+import Login from "./pages/Login";
+import global from "./global";
 
 /**
  * The root app component.
@@ -22,15 +23,23 @@ export default function Root() {
 	const router = useRouter(url);
 	const themeType = useThemeType();
 	const networkChannel = useChannel('network');
-	const [appReady, setAppReady] = React.useState(false);
+	const [appReady, setAppReady] = useState(false);
+	const [routerDone, setRouterDone] = useState(false);
 	const app = useAppWindow();
+
+	global.router = router;
 
 	useEffect(() => {
 		(async () => {
 			if (app.isDesktop) {
 				try {
 					const isConnected = await networkChannel.executeTask<{}, boolean>('isConnected', {});
-					setAppReady(true)
+
+					if (isConnected) {
+						setAppReady(true)
+					} else {
+						alert('You are not connected to the internet. Please connect to the internet and try again.');
+					}
 				} catch {
 					alert('You are not connected to the internet. Please connect to the internet and try again.');
 				}
@@ -59,12 +68,18 @@ export default function Root() {
 	}, []);
 
 	useEffect(() => {
+		if (routerDone) return;
+
 		router.addRoute('/', <Home />)
 		router.addRoute('/appInfo', <AppInfo />)
+		router.addRoute('/login', <Login />);
+
+		setRouterDone(true);
 
 		return () => {
 			router.removeRoute('/');
 			router.removeRoute('/appInfo');
+			router.removeRoute('/login');
 		}
 	}, [])
 

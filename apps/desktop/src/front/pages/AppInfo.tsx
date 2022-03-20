@@ -1,4 +1,5 @@
 import React from 'react';
+import packageJSON from '../../../package.json';
 
 /**
  * The application info page.
@@ -6,9 +7,15 @@ import React from 'react';
  */
 export default function AppInfo() {
 	return (
-		<h1 style={{
-			width: '100%',
-			textAlign: 'center',
-		}}>App Info (Failed To Get)</h1>
+		<>
+			<h1 style={{
+				width: '100%',
+				textAlign: 'center',
+			}}>App Info</h1>
+
+			<p>
+				<strong>Version:</strong> {packageJSON.version}
+			</p>
+		</>
 	);
 }
