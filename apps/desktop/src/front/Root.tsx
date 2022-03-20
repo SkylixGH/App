@@ -8,7 +8,7 @@ import {
 	useChannel,
 	App,
 	useRouter,
-	useThemeType
+	useThemeType, useAppWindow
 } from "@nexts-stack/desktop-uix";
 import Home from "./pages/Home";
 import AppInfo from "./pages/AppInfo";
@@ -23,22 +23,39 @@ export default function Root() {
 	const themeType = useThemeType();
 	const networkChannel = useChannel('network');
 	const [appReady, setAppReady] = React.useState(false);
-	const isElectron = typeof window !== 'undefined' && window.process && window.process.type === 'renderer'
+	const app = useAppWindow();
 
 	useEffect(() => {
 		(async () => {
-			if (isElectron) {
+			if (app.isDesktop) {
 				try {
 					const isConnected = await networkChannel.executeTask<{}, boolean>('isConnected', {});
 					setAppReady(true)
 				} catch {
 					alert('You are not connected to the internet. Please connect to the internet and try again.');
-
 				}
-			} else {
+			} else if (window.navigator.onLine) {
 				setAppReady(true);
+			} else {
+				alert('You are not connected to the internet. Please connect to the internet and try again.');
 			}
 		})();
+
+		const connectListener = () => {
+			setAppReady(true);
+		};
+
+		const disconnectListener = () => {
+			setAppReady(false);
+		};
+
+		window.addEventListener('online', connectListener);
+		window.addEventListener('offline', disconnectListener);
+
+		return () => {
+			window.removeEventListener('online', connectListener);
+			window.removeEventListener('offline', disconnectListener);
+		};
 	}, []);
 
 	useEffect(() => {
@@ -56,8 +73,7 @@ export default function Root() {
 			<NavigationView sideRail={[
 				{
 					icon: {
-						src: themeType === 'light' ? TitleBarLightIcon : TitleBarDarkIcon,
-						type: 'image'
+						src: 'fluent:home-16-regular',
 					},
 					active: '/',
 					action: () => router.navigate('/'),
