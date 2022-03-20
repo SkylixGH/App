@@ -51,8 +51,6 @@ export default defineConfig({
 			dependencies: {
 				'@nexts-stack/desktop-uix': pkg.devDependencies['@nexts-stack/cli-service'],
 				'@nexts-stack/desktop': pkg.devDependencies['@nexts-stack/cli-service'],
-				"@nexts-stack/desktop": "^1.0.0-dev.11",
-				"@nexts-stack/desktop-uix": "^1.0.0-dev.11",
 			}
 		}
 	]
