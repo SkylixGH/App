@@ -7,12 +7,14 @@
     "dev:desktop": "nexts dev --name desktop",
     "dev:mobile": "nexts dev --name mobile",
     "dev:web": "nexts dev --name web",
+    "dev:website": "cd skylix && next dev",
     "dev:server": "nexts dev --name server",
     "compile": "nexts compile",
-    "postinstall": "nexts compile"
+    "postinstall": "cd skylix && npm i && cd .. && nexts compile"
   },
   "devDependencies": {
     "typescript": "^4.6.2",
-    "@nexts-stack/cli-service": "^1.0.0-dev.12"
+    "@nexts-stack/cli-service": "^1.0.0-dev.12",
+    "eslint-config-next": "12.1.0"
   }
 }
